@@ -149,6 +149,8 @@ public class Principal extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         Resultado = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
 
         Texto1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         Texto1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -192,7 +194,7 @@ public class Principal extends javax.swing.JFrame {
 
         Texto.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         Texto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        Texto.setToolTipText("Inserte el número binario al que desea sacar el complemmento a 1");
+        Texto.setToolTipText("Inserte el segundo dígito de la suma, con la misma longitud que la anterior.");
         Texto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 TextoKeyReleased(evt);
@@ -257,7 +259,7 @@ public class Principal extends javax.swing.JFrame {
 
         Valor.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         Valor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        Valor.setToolTipText("Inserte el número binario al que desea sacar el complemmento a 1");
+        Valor.setToolTipText("Inserte el primer dígito de la suma");
         Valor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 ValorKeyReleased(evt);
@@ -275,13 +277,19 @@ public class Principal extends javax.swing.JFrame {
 
         Resultado.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         Resultado.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        Resultado.setToolTipText("Inserte el número binario al que desea sacar el complemmento a 1");
+        Resultado.setToolTipText("Resultado en el que se muestra.");
         Resultado.setEnabled(false);
         Resultado.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 ResultadoKeyReleased(evt);
             }
         });
+
+        jLabel1.setText("+");
+
+        jLabel20.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
+        jLabel20.setText("Meter los dos dígitos de la misma longitud.");
+        jLabel20.setToolTipText("Descripción de programa");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -341,6 +349,9 @@ public class Principal extends javax.swing.JFrame {
                                     .addComponent(jLabel7))))
                         .addGap(45, 45, 45))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(Resultado, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(56, 56, 56))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel17)
                             .addComponent(jLabel18))
@@ -348,9 +359,13 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(Valor, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
                             .addComponent(Texto, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-                            .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Resultado, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE))
-                        .addGap(82, 82, 82))))
+                            .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel1)
+                        .addGap(36, 36, 36))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel20)
+                        .addGap(196, 196, 196))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -365,17 +380,20 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Valor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Texto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel18))
+                    .addComponent(jLabel18)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(Resultado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -475,7 +493,7 @@ public class Principal extends javax.swing.JFrame {
 
         EspacioCadena(); // Llamado al método que agrega el espacio para la terminación de la máquina.
 
-        if (Texto.getText().length() == Valor.getText().length()) {
+        //if (Texto.getText().length() == Valor.getText().length()) {
             do {
                 caracter = Character.toString(Texto.getText().charAt(posicion)); //Obtiene el valor de la cadena 1.
                 Text = Character.toString(Valor.getText().charAt(posicion)); //Obtiene el valor de la segunda cadena
@@ -520,9 +538,9 @@ public class Principal extends javax.swing.JFrame {
                     }
                 }
             } while (!error);
-        } else {
+        /*} else {
             JOptionPane.showMessageDialog(null, "La longitud de las cadenas es diferente,\nCambiar los valores aquí establecidos", "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
+        }*/
 
         Resultado.setText(modificado);
         //Pasa el foco al textfield del código
@@ -603,6 +621,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField Texto1;
     private javax.swing.JTextField Valor;
     private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -614,6 +633,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
