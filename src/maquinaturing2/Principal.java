@@ -37,23 +37,23 @@ public class Principal extends javax.swing.JFrame {
 
         //Llenado de la matriz de Transición
         matrizTransicion[0][0][0] = "0";
-        matrizTransicion[0][0][1] = "3";
+        matrizTransicion[0][0][1] = " ";
         matrizTransicion[0][0][2] = "1";
 
         matrizTransicion[0][1][0] = "0";
-        matrizTransicion[0][1][1] = "3";
+        matrizTransicion[0][1][1] = " ";
         matrizTransicion[0][1][2] = "1";
 
         matrizTransicion[0][2][0] = "0";
-        matrizTransicion[0][2][1] = "3";
+        matrizTransicion[0][2][1] = " ";
         matrizTransicion[0][2][2] = "1";
 
         matrizTransicion[0][3][0] = "0";
-        matrizTransicion[0][3][1] = "3";
+        matrizTransicion[0][3][1] = " ";
         matrizTransicion[0][3][2] = "1";
 
         matrizTransicion[0][4][0] = "1";
-        matrizTransicion[0][4][1] = "3";
+        matrizTransicion[0][4][1] = " ";
         matrizTransicion[0][4][2] = "-1";
 
         matrizTransicion[1][0][0] = "1";
@@ -73,7 +73,7 @@ public class Principal extends javax.swing.JFrame {
         matrizTransicion[1][3][2] = "-1";
 
         matrizTransicion[1][4][0] = "3";
-        matrizTransicion[1][4][1] = "3";
+        matrizTransicion[1][4][1] = " ";
         matrizTransicion[1][4][2] = "1";
 
         matrizTransicion[2][0][0] = "1";
@@ -279,11 +279,6 @@ public class Principal extends javax.swing.JFrame {
         Resultado.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         Resultado.setToolTipText("Resultado en el que se muestra.");
         Resultado.setEnabled(false);
-        Resultado.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                ResultadoKeyReleased(evt);
-            }
-        });
 
         jLabel1.setText("+");
 
@@ -421,23 +416,6 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TextoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextoKeyReleased
-        //Método para habilitar el botón de limpiar una vez que se escibe algo en el cuadro de texto
-        if (Texto.getText().length() != 0 && Valor.getText().length() != 0) {
-            Limpiar.setEnabled(true); //habilitación del botón de limpiar
-            Obtener.setEnabled(true); //habilitación del botón de obtener
-
-        } else {
-            if (Texto.getText().length() != 0) {
-                Limpiar.setEnabled(true); //habilitación del botón de limpiar                
-
-            } else {
-                Limpiar.setEnabled(false); //deshabilitación del botón de limpiar
-                Obtener.setEnabled(false); //deshabilitación del botón de obtener
-            }
-        }
-    }//GEN-LAST:event_TextoKeyReleased
-
     private void LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarActionPerformed
         //Método que se ejecuta al dar clic en el botón de limpiar
         Texto.setText(""); //se vacia la caja de texto
@@ -452,8 +430,18 @@ public class Principal extends javax.swing.JFrame {
 
     public void EspacioCadena() {
         //Método que agrega el espacio respectivo para la terminación de la máquina
-        Texto.setText(" " + Texto.getText() + " ");
-        Valor.setText(" " + Valor.getText() + " ");
+        if (!Texto.getText().startsWith(" ")) {
+            Texto.setText(" " + Texto.getText());        
+        } 
+        if (!Valor.getText().startsWith(" ")) {
+            Valor.setText(" " + Valor.getText());
+        }
+        if (!Texto.getText().endsWith(" ")) {
+            Texto.setText(Texto.getText() + " ");
+        }
+        if (!Valor.getText().endsWith(" ")) {
+            Valor.setText(Valor.getText() + " ");
+        } 
     }
 
     public int ChecarAlfabeto(String caracter, String character) {
@@ -487,45 +475,50 @@ public class Principal extends javax.swing.JFrame {
 
     private void ObtenerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ObtenerActionPerformed
         // Método que se deesencadena tras pulsar el boton de Obtener de la interfaz principal
-        int estado = 0, movimiento, posicion = 1, valor, cambio, state = 0;
-        String caracter, Text, modificado = "", mostrar = "";
+        int estado = 0, movimiento, posicion = 1, valor, state = 0;
+        String caracter, Text, modificado = "", mostrar = "", cambio;
         boolean error = false;
 
         EspacioCadena(); // Llamado al método que agrega el espacio para la terminación de la máquina.
 
         //if (Texto.getText().length() == Valor.getText().length()) {
-            do {
-                caracter = Character.toString(Texto.getText().charAt(posicion)); //Obtiene el valor de la cadena 1.
-                Text = Character.toString(Valor.getText().charAt(posicion)); //Obtiene el valor de la segunda cadena
+        do {
+            caracter = Character.toString(Texto.getText().charAt(posicion)); //Obtiene el valor de la cadena 1.
+            Text = Character.toString(Valor.getText().charAt(posicion)); //Obtiene el valor de la segunda cadena
 
+            if (" 1".equals(caracter + Text) || " 0".equals(caracter + Text) || "1 ".equals(caracter + Text) || "0 ".equals(caracter + Text)) {
+                mostrar += "\n[" + state + "] [" + caracter + Text + "] ---->";
+                JOptionPane.showMessageDialog(null, mostrar + "\nUn dato tiene mayor longitud que otro", "ERROR", JOptionPane.ERROR_MESSAGE);                
+                error = true;
+
+            } else {
                 valor = ChecarAlfabeto(caracter, Text); // Llamado al método para checar si el caracter pertenece al alfabeto.
 
-                if (valor == -1) { //Entra si NO encuentra el caracter en el alfabeto
+                if (valor == -1) { //Entra si NO encuentra el caracter en el alfabeto                    
                     mostrar += "\n[" + state + "] [" + caracter + Text + "] ---->";
                     JOptionPane.showMessageDialog(null, mostrar + "\nEl caracter no existe en el alfabeto binario de la máquina", "ERROR", JOptionPane.ERROR_MESSAGE);
                     error = true;
 
                 } else {
-                    state = estado; //Gaurda el estado para que no se pierda y sirva de busqueda en los respectivos métodos que se necesiten.
-                    System.out.println(modificado);
+                    state = estado; //Gaurda el estado para que no se pierda y sirva de busqueda en los respectivos métodos que se necesiten.                    
                     estado = Integer.parseInt(ObtencionEstado(state, valor)); //Llamado al método que obtiene el estado al que se moverá el apuntador
 
                     if (estado == 99) { //Entra si encuentra el estado final
                         mostrar += "\n[" + state + "] [" + caracter + Text + "] ----> (99, , )";
-                        JOptionPane.showMessageDialog(null, mostrar + "\nEl proceso ha terminado de forma correcta\n\n El resultado del Complemento a 1 es:\n\n" + modificado, "RESULTADO", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, mostrar + "\nEl proceso ha terminado de forma correcta\n\n El resultado de la suma es:\n\n" + modificado, "RESULTADO", JOptionPane.INFORMATION_MESSAGE);
                         error = true;
 
                     } else { //Entra si aún sigue en el proceso sin ningún error encontrado.
-                        cambio = Integer.parseInt(this.ObtencionConversion(state, valor)); //Llamado del método de obtención de caracter por el que se va a cambiar el valor en la cadena.
-                        if (cambio != 3) {
+                        cambio = (this.ObtencionConversion(state, valor)); //Llamado del método de obtención de caracter por el que se va a cambiar el valor en la cadena.
+                        if (!cambio.equalsIgnoreCase("3")) {
                             modificado = cambio + modificado; //Agregado a la cadena donde se van almacenando los datos que salen de la máquina de Turing
                         } else {
                             modificado += " "; //Agregado a la cadena final del espacio terminador
                         }
 
                         movimiento = Integer.parseInt(this.ObtencionMovimiento(state, valor));//Llamado al método de obtención del movimiento ha realizar por el apuntador en la máquina de Turing
-                        mostrar += "\n[" + state + "] [" + caracter + Text + "] ----> (" + estado + ", " + cambio + ", " + movimiento + ")";
-                        
+                        mostrar += "\n[" + state + "] [" + caracter + Text + "] ----> (" + estado + ", (" + caracter + ", " + Text + ", " + cambio + "), " + movimiento + ")";
+
                         switch (movimiento) { //Checa el tipo de movimiento que da como resultado de la tabla de transición
                             case -1://Entra aquí si el movimiento del apuntador que se debe realizar es hacia la izquierda
                                 posicion--;
@@ -537,7 +530,8 @@ public class Principal extends javax.swing.JFrame {
                         }
                     }
                 }
-            } while (!error);
+            }
+        } while (!error);
         /*} else {
             JOptionPane.showMessageDialog(null, "La longitud de las cadenas es diferente,\nCambiar los valores aquí establecidos", "ERROR", JOptionPane.ERROR_MESSAGE);
         }*/
@@ -574,9 +568,22 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Texto1KeyReleased
 
-    private void ResultadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ResultadoKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ResultadoKeyReleased
+    private void TextoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextoKeyReleased
+        //Método para habilitar el botón de limpiar una vez que se escibe algo en el cuadro de texto
+        if (Texto.getText().length() != 0 && Valor.getText().length() != 0) {
+            Limpiar.setEnabled(true); //habilitación del botón de limpiar
+            Obtener.setEnabled(true); //habilitación del botón de obtener
+
+        } else {
+            if (Valor.getText().length() != 0) {
+                Limpiar.setEnabled(true); //habilitación del botón de limpiar                
+
+            } else {
+                Limpiar.setEnabled(false); //deshabilitación del botón de limpiar
+                Obtener.setEnabled(false); //deshabilitación del botón de obtener
+            }
+        }
+    }//GEN-LAST:event_TextoKeyReleased
 
     /**
      * @param args the command line arguments

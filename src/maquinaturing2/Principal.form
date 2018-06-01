@@ -428,9 +428,6 @@
         <Property name="toolTipText" type="java.lang.String" value="Resultado en el que se muestra."/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
-      <Events>
-        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="ResultadoKeyReleased"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
